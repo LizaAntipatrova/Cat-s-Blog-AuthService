@@ -1,4 +1,4 @@
-package ru.meow.meowauth.exceptions;
+package ru.meow.meowauth.exceptions.data;
 
 public class ExistingUserWithThatUsernameException extends RuntimeException {
     public ExistingUserWithThatUsernameException() {

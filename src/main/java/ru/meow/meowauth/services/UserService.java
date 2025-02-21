@@ -6,7 +6,8 @@ import ru.meow.meowauth.data.entity.roles.RoleType;
 import ru.meow.meowauth.data.entity.user.User;
 import ru.meow.meowauth.data.repositories.RoleRepository;
 import ru.meow.meowauth.data.repositories.UserRepository;
-import ru.meow.meowauth.exceptions.ExistingUserWithThatUsernameException;
+import ru.meow.meowauth.exceptions.data.ExistingUserWithThatUsernameException;
+import ru.meow.meowauth.exceptions.data.UserNotFoundException;
 
 import java.util.Set;
 
@@ -33,5 +34,6 @@ public class UserService {
 
         return save(user);
     }
+
 
 }
