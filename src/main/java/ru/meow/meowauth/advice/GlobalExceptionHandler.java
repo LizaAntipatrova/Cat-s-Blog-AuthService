@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import ru.meow.meowauth.exceptions.DecodeCredentialsException;
-import ru.meow.meowauth.exceptions.ExistingUserWithThatUsernameException;
-import ru.meow.meowauth.exceptions.InvalidBasicAuthorizationHeaderException;
-import ru.meow.meowauth.exceptions.UserNotFoundException;
+import ru.meow.meowauth.exceptions.auth.DecodeCredentialsException;
+import ru.meow.meowauth.exceptions.auth.InvalidBasicAuthorizationHeaderException;
+import ru.meow.meowauth.exceptions.data.ExistingUserWithThatUsernameException;
+import ru.meow.meowauth.exceptions.data.UserNotFoundException;
 
 import java.time.LocalDateTime;
 
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
         errorResponse.setMessage(ex.getMessage());
         errorResponse.setPath(request.getDescription(false));
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DecodeCredentialsException.class)
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
         errorResponse.setMessage(ex.getMessage());
         errorResponse.setPath(request.getDescription(false));
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidBasicAuthorizationHeaderException.class)
@@ -73,7 +73,8 @@ public class GlobalExceptionHandler {
         errorResponse.setMessage(ex.getMessage());
         errorResponse.setPath(request.getDescription(false));
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+
 
 }
