@@ -1,4 +1,4 @@
-package ru.meow.meowauth.exceptions.auth;
+package ru.meow.meowauth.exceptions;
 
 public class InvalidBasicAuthorizationHeaderException extends RuntimeException {
     public InvalidBasicAuthorizationHeaderException() {

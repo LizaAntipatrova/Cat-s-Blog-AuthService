@@ -1,4 +1,4 @@
-package ru.meow.meowauth.exceptions.data;
+package ru.meow.meowauth.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException() {

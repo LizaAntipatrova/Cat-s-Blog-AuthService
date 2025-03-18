@@ -1,17 +1,17 @@
 package ru.meow.meowauth.services.parser;
 
-import ru.meow.meowauth.exceptions.auth.DecodeCredentialsException;
-import ru.meow.meowauth.exceptions.auth.InvalidBasicAuthorizationHeaderException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import ru.meow.meowauth.exceptions.DecodeCredentialsException;
+import ru.meow.meowauth.exceptions.InvalidBasicAuthorizationHeaderException;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
 
-
-public class AuthorizationHeaderToCredentialParser {
+public class AuthorizationHeaderToUsernamePasswordAuthenticationToken {
     private static final String BASIC_PREFIX = "Basic ";
 
-    public static Credential parse(String authenticationHeader) {
+    public static UsernamePasswordAuthenticationToken getAuthenticationToken(String authenticationHeader) {
         try {
             if (!authenticationHeader.startsWith(BASIC_PREFIX)) {
                 throw new InvalidBasicAuthorizationHeaderException();
@@ -26,8 +26,11 @@ public class AuthorizationHeaderToCredentialParser {
             if (parts.size() != 2) {
                 throw new InvalidBasicAuthorizationHeaderException();
             }
-            return new Credential(parts.get(0), parts.get(1));
 
+            String username = parts.get(0);
+            String password = parts.get(1);
+
+            return new UsernamePasswordAuthenticationToken(username, password);
         } catch (IllegalArgumentException e) {
             throw new DecodeCredentialsException();
         }

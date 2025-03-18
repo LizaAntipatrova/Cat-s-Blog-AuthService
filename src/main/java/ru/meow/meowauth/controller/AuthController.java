@@ -29,10 +29,4 @@ public class AuthController {
     public ResponseEntity<?> signIn(@RequestHeader("Authorization") String authorizationHeader) {
         return authService.signIn(authorizationHeader);
     }
-
-    @Operation(summary = "Выход из системы")
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(@RequestHeader("Cookie") String cookieHeader) {
-        return authService.logout(cookieHeader);
-    }
 }
