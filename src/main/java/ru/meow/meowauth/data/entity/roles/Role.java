@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Getter
@@ -13,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,8 +24,4 @@ public class Role implements GrantedAuthority {
         this.name = role;
     }
 
-    @Override
-    public String getAuthority() {
-        return name.name();
-    }
 }
