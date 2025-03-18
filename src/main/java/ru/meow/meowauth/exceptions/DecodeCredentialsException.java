@@ -1,4 +1,4 @@
-package ru.meow.meowauth.exceptions.auth;
+package ru.meow.meowauth.exceptions;
 
 public class DecodeCredentialsException extends RuntimeException {
     public DecodeCredentialsException() {

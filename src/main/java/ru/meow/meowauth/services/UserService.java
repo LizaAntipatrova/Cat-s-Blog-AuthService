@@ -6,7 +6,7 @@ import ru.meow.meowauth.data.entity.roles.RoleType;
 import ru.meow.meowauth.data.entity.user.User;
 import ru.meow.meowauth.data.repositories.RoleRepository;
 import ru.meow.meowauth.data.repositories.UserRepository;
-import ru.meow.meowauth.exceptions.data.ExistingUserWithThatUsernameException;
+import ru.meow.meowauth.exceptions.ExistingUserWithThatUsernameException;
 
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public class UserService {
 
     public User createUser(String username, String password) {
 
-        if (findUserByUsername(username) != null) {
+        if (userRepository.findByUsername(username) != null) {
             throw new ExistingUserWithThatUsernameException();
         }
         User user = new User();
@@ -34,8 +34,4 @@ public class UserService {
         return save(user);
     }
 
-
-    public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
 }
