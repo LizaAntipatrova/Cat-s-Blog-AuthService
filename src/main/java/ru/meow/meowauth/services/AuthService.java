@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import ru.meow.meowauth.config.BCryptPasswordEncoder;
 import ru.meow.meowauth.data.entity.session.Session;
 import ru.meow.meowauth.data.entity.user.User;
-import ru.meow.meowauth.data.repositories.UserRepository;
 import ru.meow.meowauth.services.parser.AuthorizationHeaderToCredentialParser;
 import ru.meow.meowauth.services.parser.CookieHeaderParser;
 import ru.meow.meowauth.services.parser.Credential;
@@ -25,7 +24,6 @@ public class AuthService {
 
     public static final String COOKIE_HEADER_SESSION_ID_NAME = "CATSSESSIONID";
     private final BCryptPasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
     private final UserService userService;
     private final RedisSessionService redisSessionService;
 
@@ -66,7 +64,7 @@ public class AuthService {
 
     private Session createSession(String username) {
         String sessionId = UUID.randomUUID().toString();
-        User user = userRepository.findByUsername(username);
+        User user = userService.findUserByUsername(username);
         Session session = new Session();
         session.setSessionId(sessionId);
         session.setUserId(user.getId());
